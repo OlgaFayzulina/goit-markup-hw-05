@@ -280,6 +280,27 @@ body {
     margin-right: 30px;
 }
 
+.service-thumb {
+    position: relative;
+}
+
+.service-thumb > .service-label {
+    position: absolute;
+    margin: 0;
+    bottom: 0;
+    left: 0;
+    padding-top: 27px;
+    padding-bottom: 27px;
+    background-color: rgba(47, 48, 58, 0.8);
+    
+    font-weight: bold;
+    line-height: 1.14;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--white-color);
+    width: 100%;
+}
+
 
 /* our team */
 .members .title {

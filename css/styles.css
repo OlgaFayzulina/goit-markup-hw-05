@@ -8,6 +8,7 @@
 /* дополнительный цвет фона background: #F5F4FA; */
 /* цвет линии хэдер color: #ECECEC; */
 /* цвет иконки color: #AFB1B8 */
+/* распределение времени cubic-bezier(0.4, 0, 0.2, 1) */
 
 :root {
     --primary-text-color: #757575;
@@ -20,6 +21,7 @@
     --border-line-color: #EEEEEE;
     --additional-line-color: #ECECEC;
     --icon-color: #AFB1B8;
+    --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 html {
@@ -134,18 +136,24 @@ html body button:focus {
 }
 
 .site-nav .link.current::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    /* transform: scaleX(0); */
     content: "";
     display: block;
-    width: 48px;
+    width: 100%;
     height: 4px;
     background-color: var(--accent-color);
     border-radius: 2px;
-    position: absolute;
     margin: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+    /* transition: transform 250ms var(--timing-function); */
 }
+
+/* .link.current:hover::after,
+.link.current:focus::after {
+    transform: scaleX(1);
+} */
 
 
 /* contacts */
@@ -504,6 +512,7 @@ html body button:focus {
     align-items: center;
     text-align: center;
     letter-spacing: 0.06em;
+    cursor: pointer;
 }
 
 /* footer */
@@ -631,7 +640,10 @@ hr {
     font-weight: 500;
     font-size: 16px;
     line-height: 1.6;
-    text-align: center;   
+    text-align: center;
+    transition: box-shadow 250ms var(--timing-function); 
+    cursor: pointer;
+
 }
 
 .button.secondary:hover,
@@ -694,12 +706,13 @@ hr {
 
 .work-nav {
     display: flex;
-    flex-wrap: wrap;   
+    flex-wrap: wrap; 
 }
 
 .work-nav .link {
     display: inline-block;
     text-decoration: none;
+    transition: box-shadow 250ms var(--timing-function);
 }
 
 .work-nav .link:hover,
@@ -724,24 +737,22 @@ hr {
 
 .product-thumb {
     position: relative;
+    overflow: hidden;
 }
 
-.product-thumb::before {
-    content: "";
-    display: inline-block;
+.product-overlay {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(33, 150, 243, 0.9);
-    opacity: 0;
+    transform: translateY(100%);
+    transition: transform 250ms var(--timing-function);
 }
 
-.product-thumb:hover::before {
-    opacity: 1;
-}
-
-.product-item:hover .product-thumb::before {
-    opacity: 1;
+.product-item:hover .product-overlay {
+    transform: translateY(0) 
 }
 
 .product-label {
@@ -757,13 +768,14 @@ hr {
     font-size: 18px;
     line-height: 1.5;  
     letter-spacing: 0.03em;
-    color: var(--white-color);
+    color: rgba(255, 255, 255, 1);
     letter-spacing: 0.03em;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transition: opacity 250ms var(--timing-function);         
 }
 
 .product-item:hover .product-label {
-    opacity: 1;
+    opacity: 0.7;
 }
 
 .work-nav .item:nth-child(3n) {
@@ -783,6 +795,9 @@ hr {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transition: opacity 250ms var(--timing-function);
+    
 }
 
 .backdrop.is-hidden {
@@ -790,14 +805,36 @@ hr {
     pointer-events: none;
 }
 
+.backdrop.is-hidden .modal {
+    transform: translate(-50%, -50%) scale(0.9);
+}
+
 .modal {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(1);
 
     width: 528px;
     height: 581px;
-    padding: 25px;
-    background-color: var(--white-color);  
+    background-color: var(--white-color);
+    padding: 8px; 
+    
+    transition: transform 250ms var(--timing-function);
+}
+
+.close-icon {
+    display: block;
+    margin-left: auto;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+
+    background-image: url(../images/close-black-18dp-opt.svg);
+    background-repeat: no-repeat;
+    background-position: 54% 100%;
+    background-color: transparent;
+    cursor: pointer;
 }

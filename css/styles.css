@@ -801,8 +801,8 @@ hr {
     transition: opacity 250ms var(--timing-function);         
 }
 
-.work-nav .link .product-label,
-.work-nav .link .product-label {
+.work-nav .link:hover .product-label,
+.work-nav .link:focus .product-label {
     opacity: 0.7;
 }
 

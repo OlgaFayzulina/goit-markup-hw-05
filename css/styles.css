@@ -777,7 +777,8 @@ hr {
     transition: transform 250ms var(--timing-function);
 }
 
-.product-item:hover .product-overlay {
+.work-nav .link:hover .product-overlay,
+.work-nav .link:focus .product-overlay {
     transform: translateY(0) 
 }
 
@@ -800,7 +801,8 @@ hr {
     transition: opacity 250ms var(--timing-function);         
 }
 
-.product-item:hover .product-label {
+.work-nav .link .product-label,
+.work-nav .link .product-label {
     opacity: 0.7;
 }
 
